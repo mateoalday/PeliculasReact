@@ -1,24 +1,25 @@
-import { useState, useEffect, useMemo } from 'react';
 import styles from './Filters.module.css';
 
 const Filters = ({ 
-  genreFilter, 
-  onGenreChange, 
-  typeFilter, 
-  onTypeChange,
-  sortBy,
-  onSortChange,
-  sortOrder,
-  onSortOrderChange 
+  filtroGenero, 
+  onGeneroChange, 
+  filtroTipo, 
+  onTipoChange,
+  ordenarPor,
+  onOrdenChange,
+  orden,
+  onOrdenDireccionChange 
 }) => {
   return (
     <div className={styles.filtersContainer}>
+      
+      {/* 🎬 GÉNERO */}
       <div className={styles.filterGroup}>
         <label className={styles.label}>Género</label>
         <select 
           className={styles.select}
-          value={genreFilter}
-          onChange={(e) => onGenreChange(e.target.value)}
+          value={filtroGenero}
+          onChange={(e) => onGeneroChange(e.target.value)}
         >
           <option value="">Todos</option>
           <option value="Acción">Acción</option>
@@ -34,12 +35,13 @@ const Filters = ({
         </select>
       </div>
 
+      {/* 🎞 TIPO */}
       <div className={styles.filterGroup}>
         <label className={styles.label}>Tipo</label>
         <select 
           className={styles.select}
-          value={typeFilter}
-          onChange={(e) => onTypeChange(e.target.value)}
+          value={filtroTipo}
+          onChange={(e) => onTipoChange(e.target.value)}
         >
           <option value="">Todos</option>
           <option value="Película">Películas</option>
@@ -47,36 +49,28 @@ const Filters = ({
         </select>
       </div>
 
+      {/* 📊 ORDEN */}
       <div className={styles.filterGroup}>
         <label className={styles.label}>Ordenar por</label>
         <select 
           className={styles.select}
-          value={sortBy}
-          onChange={(e) => onSortChange(e.target.value)}
+          value={ordenarPor}
+          onChange={(e) => onOrdenChange(e.target.value)}
         >
           <option value="">Sin orden</option>
-          <option value="year">Año</option>
+          <option value="año">Año</option>
           <option value="rating">Rating</option>
         </select>
       </div>
 
-      {sortBy && (
+      {/* 🔄 ORDEN ASC / DESC */}
+      {ordenarPor && (
         <button 
           className={styles.sortButton}
-          onClick={onSortOrderChange}
-          title={sortOrder === 'asc' ? 'Orden ascendente' : 'Orden descendente'}
+          onClick={onOrdenDireccionChange}
+          title={orden === 'asc' ? 'Ascendente' : 'Descendente'}
         >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2"
-            className={sortOrder === 'desc' ? styles.rotated : ''}
-          >
-            <path d="M12 5v14M19 12l-7 7-7-7"/>
-          </svg>
-          {sortOrder === 'asc' ? 'Ascendente' : 'Descendente'}
+          {orden === 'asc' ? 'Ascendente ↑' : 'Descendente ↓'}
         </button>
       )}
     </div>
