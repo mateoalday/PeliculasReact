@@ -1,0 +1,129 @@
+.card {
+  background: linear-gradient(135deg, var(--color-surface) 0%, rgba(22, 33, 62, 0.8) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+/* línea superior */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-gold));
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tipo {
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.pelicula {
+  background: var(--color-accent);
+}
+
+.serie {
+  background: #4361ee;
+}
+
+/* TITULO */
+.titulo {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* INFO */
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+/* RATING */
+.rating {
+  color: var(--color-gold);
+  font-weight: bold;
+}
+
+/* BOTONES */
+.botones {
+  display: flex;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-sm);
+}
+
+.boton {
+  flex: 1;
+  padding: 6px;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+/* BOTÓN ESTADO */
+.estado {
+  background: var(--color-success);
+}
+
+.estado:hover {
+  transform: scale(1.05);
+}
+
+/* EDITAR */
+.editar {
+  background: rgba(255, 211, 105, 0.2);
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+}
+
+.editar:hover {
+  background: var(--color-gold);
+  color: black;
+}
+
+/* ELIMINAR */
+.eliminar {
+  background: rgba(233, 69, 96, 0.2);
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+.eliminar:hover {
+  background: var(--color-accent);
+  color: white;
+}
