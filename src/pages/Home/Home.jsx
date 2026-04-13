@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import Titulo from "../components/Titulo/Titulo.jsx";
-import MediaList from "../components/MediaList/MediaList.jsx";
+import Titulo from "../../components/Titulo/Titulo.jsx";
+import MediaList from "../../components/MediaList/MediaList.jsx";
 import styles from "./Home.module.css";
+import MediaForm from '../../components/MediaForm/MediaForm.jsx';
 
 const Home = () => {
   const [peliculas, setPeliculas] = useState([]);
@@ -13,37 +14,37 @@ const Home = () => {
   const [editando, setEditando] = useState(null);
 
   // 📦 LOCAL STORAGE
-useEffect(() => {
-  const data = JSON.parse(localStorage.getItem('cinetrack-peliculas'));
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('cinetrack-peliculas'));
 
-  if (data && data.length > 0) {
-    setPeliculas(data);
-  } else {
-    // 🔥 DATOS DE PRUEBA
-    setPeliculas([
-      {
-        id: 1,
-        titulo: "Batman",
-        director: "Nolan",
-        año: 2008,
-        genero: "Acción",
-        rating: 9,
-        tipo: "Película",
-        visto: false
-      },
-      {
-        id: 2,
-        titulo: "Breaking Bad",
-        director: "Vince Gilligan",
-        año: 2008,
-        genero: "Drama",
-        rating: 10,
-        tipo: "Serie",
-        visto: true
-      }
-    ]);
-  }
-}, []);
+    if (data && data.length > 0) {
+      setPeliculas(data);
+    } else {
+      // 🔥 DATOS DE PRUEBA
+      setPeliculas([
+        {
+          id: 1,
+          titulo: "Batman",
+          director: "Nolan",
+          año: 2008,
+          genero: "Acción",
+          rating: 9,
+          tipo: "Película",
+          visto: false
+        },
+        {
+          id: 2,
+          titulo: "Breaking Bad",
+          director: "Vince Gilligan",
+          año: 2008,
+          genero: "Drama",
+          rating: 10,
+          tipo: "Serie",
+          visto: true
+        }
+      ]);
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('cinetrack-peliculas', JSON.stringify(peliculas));
@@ -110,8 +111,17 @@ useEffect(() => {
     <div className={styles.container}>
       <Titulo>CineTrack</Titulo>
 
+      <MediaForm
+        editingMedia={editando}
+        onSubmit={handleSubmit}
+        onCancel={() => setEditando(null)}
+      />
+
       {/* 👇 ACÁ LE PASAMOS TODO */}
-      <MediaList peliculas={peliculasFiltradas} />
+      <MediaList peliculas={peliculasFiltradas}
+        accionEliminar={(item) => eliminar(item.id)}
+        accionEditar={(item) => setEditando(item)}
+        accionCambiarEstado={(item) => cambiarEstado(item.id)} />
     </div>
   );
 };
