@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import Titulo from '../../Components/Titulo/Titulo';
-import MediaList from '../../Components/MediaList/MediaList';
+import Titulo from '../../components/Titulo/Titulo';
+import MediaList from '../../components/MediaList/MediaList';
 import styles from './Home.module.css';
 
 const Home = () => {
