@@ -1,6 +1,7 @@
 import styles from './MediaList.module.css';
+import MediaCard from '../MediaCard/MediaCard';
 
-function MediaList({ peliculas }) {
+function MediaList({ peliculas, accionEliminar, accionEditar, accionCambiarEstado }) {
 
     const listaPorVer = peliculas.filter(item => item.visto === false);
     const listaVista = peliculas.filter(item => item.visto === true);
@@ -16,7 +17,14 @@ function MediaList({ peliculas }) {
                     <p>Vacio, ya viste todo</p>
                 ) : (
                     listaPorVer.map(item => (
-                        <p key={item.id}>{item.titulo}</p>
+                        <MediaCard 
+                            key={item.id} 
+                            item={item} 
+                            accionEliminar={accionEliminar} 
+                            accionEditar={accionEditar} 
+                            accionCambiarEstado={accionCambiarEstado} 
+                            textoBotonEstado="Marcar como Visto"
+                        />
                     ))
                 )}
 
@@ -30,7 +38,14 @@ function MediaList({ peliculas }) {
                     <p>Aun no viste nada</p>
                 ) : (
                     listaVista.map(item => (
-                        <p key={item.id}>{item.titulo}</p>
+                        <MediaCard 
+                            key={item.id} 
+                            item={item} 
+                            accionEliminar={accionEliminar} 
+                            accionEditar={accionEditar} 
+                            accionCambiarEstado={accionCambiarEstado} 
+                            textoBotonEstado="Marcar por Ver"
+                        />
                     ))
                 )}
 
