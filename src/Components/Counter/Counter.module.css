@@ -1,0 +1,40 @@
+.counter {
+  background-color: var(--color-card);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.counter.accent {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 15px -3px var(--color-accent);
+}
+
+.count {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1;
+}
+
+.accent .count {
+  color: var(--color-accent);
+}
+
+.label {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.accent .label {
+  color: var(--color-text);
+}
