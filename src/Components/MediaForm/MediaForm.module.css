@@ -1,0 +1,92 @@
+.formContainer {
+    background-color: #020202ff;
+    /* Mismo fondo de tus MediaCards */
+    padding: 25px;
+    border-radius: var(--radius-lg, 8px);
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* Reemplaza todos los margins inferiores */
+}
+
+.title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    border-bottom: 2px solid var(--color-accent, #646cff);
+    padding-bottom: 5px;
+}
+
+.error {
+    color: #ff4a4a;
+    font-weight: bold;
+    background-color: rgba(255, 74, 74, 0.1);
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.formGroup label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #e0e0e0;
+}
+
+.input {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #333333;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--color-accent, #646cff);
+    /* Resalta cuando haces click */
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.submitBtn {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    /* Verde estilo éxito */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.2s;
+}
+
+.submitBtn:hover {
+    opacity: 0.8;
+}
+
+.cancelBtn {
+    padding: 10px 15px;
+    background-color: #ff4a4a;
+    /* Rojo para cancelar */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.cancelBtn:hover {
+    opacity: 0.8;
+}
