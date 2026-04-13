@@ -1,76 +1,117 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import Titulo from '../../components/Titulo/Titulo';
-import MediaList from '../../components/MediaList/MediaList';
-import styles from './Home.module.css';
+import Titulo from "../components/Titulo/Titulo.jsx";
+import MediaList from "../components/MediaList/MediaList.jsx";
+import styles from "./Home.module.css";
 
 const Home = () => {
-  const [medias, setMedias] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [genreFilter, setGenreFilter] = useState('');
-  const [typeFilter, setTypeFilter] = useState('');
-  const [sortBy, setSortBy] = useState('');
-  const [sortOrder, setSortOrder] = useState('asc');
-  const [editingMedia, setEditingMedia] = useState(null);
+  const [peliculas, setPeliculas] = useState([]);
+  const [busqueda, setBusqueda] = useState('');
+  const [filtroGenero, setFiltroGenero] = useState('');
+  const [filtroTipo, setFiltroTipo] = useState('');
+  const [ordenarPor, setOrdenarPor] = useState('');
+  const [orden, setOrden] = useState('asc');
+  const [editando, setEditando] = useState(null);
 
-  // LocalStorage
+  // 📦 LOCAL STORAGE
+useEffect(() => {
+  const data = JSON.parse(localStorage.getItem('cinetrack-peliculas'));
+
+  if (data && data.length > 0) {
+    setPeliculas(data);
+  } else {
+    // 🔥 DATOS DE PRUEBA
+    setPeliculas([
+      {
+        id: 1,
+        titulo: "Batman",
+        director: "Nolan",
+        año: 2008,
+        genero: "Acción",
+        rating: 9,
+        tipo: "Película",
+        visto: false
+      },
+      {
+        id: 2,
+        titulo: "Breaking Bad",
+        director: "Vince Gilligan",
+        año: 2008,
+        genero: "Drama",
+        rating: 10,
+        tipo: "Serie",
+        visto: true
+      }
+    ]);
+  }
+}, []);
+
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('cinetrack-medias')) || [];
-    setMedias(data);
-  }, []);
+    localStorage.setItem('cinetrack-peliculas', JSON.stringify(peliculas));
+  }, [peliculas]);
 
-  useEffect(() => {
-    localStorage.setItem('cinetrack-medias', JSON.stringify(medias));
-  }, [medias]);
-
-  // CRUD
+  // ➕ CREAR / EDITAR
   const handleSubmit = (formData) => {
-    if (editingMedia) {
-      setMedias(prev =>
-        prev.map(m => m.id === editingMedia.id ? { ...m, ...formData } : m)
+    if (editando) {
+      setPeliculas(prev =>
+        prev.map(p =>
+          p.id === editando.id ? { ...p, ...formData } : p
+        )
       );
-      setEditingMedia(null);
+      setEditando(null);
     } else {
-      setMedias(prev => [...prev, { id: Date.now(), ...formData, watched: false }]);
+      setPeliculas(prev => [
+        ...prev,
+        {
+          id: Date.now(),
+          ...formData,
+          visto: false
+        }
+      ]);
     }
   };
 
-  const handleToggleWatched = id => {
-    setMedias(prev =>
-      prev.map(m => m.id === id ? { ...m, watched: !m.watched } : m)
+  // 👁 CAMBIAR ESTADO
+  const cambiarEstado = (id) => {
+    setPeliculas(prev =>
+      prev.map(p =>
+        p.id === id ? { ...p, visto: !p.visto } : p
+      )
     );
   };
 
-  const handleDelete = id => {
-    setMedias(prev => prev.filter(m => m.id !== id));
+  // ❌ ELIMINAR
+  const eliminar = (id) => {
+    setPeliculas(prev => prev.filter(p => p.id !== id));
   };
 
-  // FILTRO + ORDEN (compactado)
-  const filtered = useMemo(() => {
-    return medias
-      .filter(m =>
-        m.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        m.director.toLowerCase().includes(searchTerm.toLowerCase())
+  // 🔍 FILTRAR + ORDENAR
+  const peliculasFiltradas = useMemo(() => {
+    return peliculas
+      .filter(p =>
+        p.titulo.toLowerCase().includes(busqueda.toLowerCase()) ||
+        p.director.toLowerCase().includes(busqueda.toLowerCase())
       )
-      .filter(m => !genreFilter || m.genre === genreFilter)
-      .filter(m => !typeFilter || m.type === typeFilter)
+      .filter(p => !filtroGenero || p.genero === filtroGenero)
+      .filter(p => !filtroTipo || p.tipo === filtroTipo)
       .sort((a, b) => {
-        if (!sortBy) return 0;
-        let res = sortBy === 'year' || sortBy === 'rating'
-          ? a[sortBy] - b[sortBy]
-          : 0;
-        return sortOrder === 'asc' ? res : -res;
-      });
-  }, [medias, searchTerm, genreFilter, typeFilter, sortBy, sortOrder]);
+        if (!ordenarPor) return 0;
 
-  const unwatched = filtered.filter(m => !m.watched);
-  const watched = filtered.filter(m => m.watched);
+        let resultado = 0;
+
+        if (ordenarPor === 'año' || ordenarPor === 'rating') {
+          resultado = a[ordenarPor] - b[ordenarPor];
+        }
+
+        return orden === 'asc' ? resultado : -resultado;
+      });
+  }, [peliculas, busqueda, filtroGenero, filtroTipo, ordenarPor, orden]);
 
   return (
     <div className={styles.container}>
       <Titulo>CineTrack</Titulo>
 
-      <MediaList title="Por Ver" media={unwatched} />
-      <MediaList title="Vistas" media={watched} />
+      {/* 👇 ACÁ LE PASAMOS TODO */}
+      <MediaList peliculas={peliculasFiltradas} />
     </div>
   );
 };
