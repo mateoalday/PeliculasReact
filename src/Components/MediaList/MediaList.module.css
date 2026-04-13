@@ -1,0 +1,45 @@
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* TITULO */
+.listTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #ccc;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+/* ESTADO VACÍO */
+.emptyState {
+  text-align: center;
+  padding: 30px;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+}
+
+.emptyState p {
+  margin: 0;
+  color: #777;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .listTitle {
+    font-size: 1.2rem;
+  }
+}
