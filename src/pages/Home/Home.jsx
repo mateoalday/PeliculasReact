@@ -4,6 +4,7 @@ import MediaList from "../../components/MediaList/MediaList.jsx";
 import styles from "./Home.module.css";
 import MediaForm from '../../components/MediaForm/MediaForm.jsx';
 import StatsPanel from '../../Components/StatsPanel/StatsPanel.jsx';
+import Catalogo from '../../components/Catalogo/Catalogo.jsx';
 
 const Home = () => {
   const [peliculas, setPeliculas] = useState([]);
@@ -13,7 +14,8 @@ const Home = () => {
   const [ordenarPor, setOrdenarPor] = useState('');
   const [orden, setOrden] = useState('asc');
   const [editando, setEditando] = useState(null);
-  const [cargado, setCargado] = useState(false)
+  const [cargado, setCargado] = useState(false);
+  const [vistaActiva, setVistaActiva] = useState('catalogo');
 
    // 1-LEER: Al cargar la página lee las películas guardadas en localStorage
   // El [] hace que se ejecute solo una vez al montar el componente
@@ -54,6 +56,7 @@ const Home = () => {
         }
       ]);
     }
+    setVistaActiva('catalogo');
   };
 
   // Cambia el estado visto/no visto de una película buscándola por su id
@@ -95,19 +98,60 @@ const Home = () => {
       <Titulo>CineTrack</Titulo>
       {/* Panel que muestra estadísticas del total de películas */}
       <StatsPanel peliculas={peliculas} />
-      {/* Formulario para agregar o editar películas */}
-      <MediaForm
-        editingMedia={editando}
-        onSubmit={handleSubmit}
-        onCancel={() => setEditando(null)}
-      />
-      {/* Lista de películas con las acciones de eliminar, editar y cambiar estado */}
-      <MediaList
-        peliculas={peliculasFiltradas}
-        accionEliminar={(item) => eliminar(item.id)}
-        accionEditar={(item) => setEditando(item)}
-        accionCambiarEstado={(item) => cambiarEstado(item.id)}
-      />
+
+      <div className={styles.tabsContainer}>
+        <button 
+          className={`${styles.tabBtn} ${vistaActiva === 'catalogo' ? styles.activeTab : ''}`}
+          onClick={() => setVistaActiva('catalogo')}
+        >
+          Catálogo General
+        </button>
+        <button 
+          className={`${styles.tabBtn} ${vistaActiva === 'listas' ? styles.activeTab : ''}`}
+          onClick={() => setVistaActiva('listas')}
+        >
+          Mis Listas (Por Ver / Visto)
+        </button>
+        <button 
+          className={`${styles.tabBtn} ${vistaActiva === 'gestion' ? styles.activeTab : ''}`}
+          onClick={() => setVistaActiva('gestion')}
+        >
+          {editando ? '📝 Editando Obra...' : '➕ Añadir Nueva Obra'}
+        </button>
+      </div>
+
+      {vistaActiva === 'gestion' && (
+        <MediaForm
+          editingMedia={editando}
+          onSubmit={handleSubmit}
+          onCancel={() => {
+            setEditando(null);
+            setVistaActiva('catalogo');
+          }}
+        />
+      )}
+
+      {vistaActiva === 'catalogo' && (
+        <Catalogo peliculas={peliculasFiltradas}
+          accionEliminar={(item) => eliminar(item.id)}
+          accionEditar={(item) => {
+            setEditando(item);
+            setVistaActiva('gestion');
+          }}
+          accionCambiarEstado={(item) => cambiarEstado(item.id)} />
+      )}
+
+      {vistaActiva === 'listas' && (
+        <MediaList
+          peliculas={peliculasFiltradas}
+          accionEliminar={(item) => eliminar(item.id)}
+          accionEditar={(item) => {
+            setEditando(item);
+            setVistaActiva('gestion');
+          }}
+          accionCambiarEstado={(item) => cambiarEstado(item.id)}
+        />
+      )}
     </div>
   );
 };

@@ -18,3 +18,36 @@
 .listsSection {
   margin-top: var(--spacing-lg);
 }
+
+.tabsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.tabBtn {
+  background-color: transparent;
+  border: 2px solid var(--color-primary, #007bff);
+  color: var(--color-text, #333);
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.tabBtn:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.activeTab {
+  background-color: var(--color-primary, #007bff);
+  color: white;
+  border-color: var(--color-primary, #007bff);
+}
+
+.activeTab:hover {
+  background-color: var(--color-primary, #0056b3);
+}
