@@ -124,8 +124,6 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <Titulo>CineTrack</Titulo>
-      {/* Panel que muestra estadísticas del total de películas */}
-      <StatsPanel peliculas={peliculas} />
 
       <div className={styles.tabsContainer}>
         <button
@@ -180,6 +178,11 @@ const Home = () => {
           accionCambiarEstado={(item) => cambiarEstado(item.id)}
         />
       )}
+
+      {/* Panel que muestra estadísticas movido al fondo */}
+      <div style={{ marginTop: '40px' }}>
+         <StatsPanel peliculas={peliculas} />
+      </div>
     </div>
   );
 };
