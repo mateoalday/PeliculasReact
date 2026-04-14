@@ -3,6 +3,7 @@ import Titulo from "../../components/Titulo/Titulo.jsx";
 import MediaList from "../../components/MediaList/MediaList.jsx";
 import styles from "./Home.module.css";
 import MediaForm from '../../components/MediaForm/MediaForm.jsx';
+import StatsPanel from '../../Components/StatsPanel/StatsPanel.jsx';
 
 const Home = () => {
   const [peliculas, setPeliculas] = useState([]);
@@ -110,6 +111,8 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <Titulo>CineTrack</Titulo>
+
+      <StatsPanel peliculas={peliculas} />
 
       <MediaForm
         editingMedia={editando}

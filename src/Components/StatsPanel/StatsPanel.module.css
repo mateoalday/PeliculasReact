@@ -1,0 +1,7 @@
+.statsContainer {
+  display: flex;
+  gap: var(--spacing-md, 16px);
+  justify-content: center;
+  margin-bottom: var(--spacing-lg, 30px);
+  flex-wrap: wrap;
+}
