@@ -3,6 +3,9 @@ import styles from './MediaCard.module.css';
 const MediaCard = ({ item, accionEliminar, accionEditar, accionCambiarEstado, textoBotonEstado }) => {
   return (
     <div className={styles.card}>
+      {item.imagen && (
+        <img src={item.imagen} alt={`Póster de ${item.titulo}`} className={styles.poster} />
+      )}
       <h3 className={styles.title}>{item.titulo}</h3>
       <p><strong>Director:</strong> {item.director}</p>
       <p><strong>Año:</strong> {item.año}</p>
