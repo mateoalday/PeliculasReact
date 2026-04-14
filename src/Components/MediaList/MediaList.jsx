@@ -17,12 +17,12 @@ function MediaList({ peliculas, accionEliminar, accionEditar, accionCambiarEstad
                     <p>Vacio, ya viste todo</p>
                 ) : (
                     listaPorVer.map(item => (
-                        <MediaCard 
-                            key={item.id} 
-                            item={item} 
-                            accionEliminar={accionEliminar} 
-                            accionEditar={accionEditar} 
-                            accionCambiarEstado={accionCambiarEstado} 
+                        <MediaCard
+                            key={item.id}
+                            item={item}
+                            accionEliminar={accionEliminar}
+                            accionEditar={accionEditar}
+                            accionCambiarEstado={accionCambiarEstado}
                             textoBotonEstado="Marcar como Visto"
                         />
                     ))
@@ -38,12 +38,12 @@ function MediaList({ peliculas, accionEliminar, accionEditar, accionCambiarEstad
                     <p>Aun no viste nada</p>
                 ) : (
                     listaVista.map(item => (
-                        <MediaCard 
-                            key={item.id} 
-                            item={item} 
-                            accionEliminar={accionEliminar} 
-                            accionEditar={accionEditar} 
-                            accionCambiarEstado={accionCambiarEstado} 
+                        <MediaCard
+                            key={item.id}
+                            item={item}
+                            accionEliminar={accionEliminar}
+                            accionEditar={accionEditar}
+                            accionCambiarEstado={accionCambiarEstado}
                             textoBotonEstado="Marcar por Ver"
                         />
                     ))

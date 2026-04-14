@@ -1,22 +1,22 @@
 import styles from './Filters.module.css';
 
-const Filters = ({ 
-  filtroGenero, 
-  onGeneroChange, 
-  filtroTipo, 
+const Filters = ({
+  filtroGenero,
+  onGeneroChange,
+  filtroTipo,
   onTipoChange,
   ordenarPor,
   onOrdenChange,
   orden,
-  onOrdenDireccionChange 
+  onOrdenDireccionChange
 }) => {
   return (
     <div className={styles.filtersContainer}>
-      
+
       {/* 🎬 GÉNERO */}
       <div className={styles.filterGroup}>
         <label className={styles.label}>Género</label>
-        <select 
+        <select
           className={styles.select}
           value={filtroGenero}
           onChange={(e) => onGeneroChange(e.target.value)}
@@ -38,7 +38,7 @@ const Filters = ({
       {/* 🎞 TIPO */}
       <div className={styles.filterGroup}>
         <label className={styles.label}>Tipo</label>
-        <select 
+        <select
           className={styles.select}
           value={filtroTipo}
           onChange={(e) => onTipoChange(e.target.value)}
@@ -52,7 +52,7 @@ const Filters = ({
       {/* 📊 ORDEN */}
       <div className={styles.filterGroup}>
         <label className={styles.label}>Ordenar por</label>
-        <select 
+        <select
           className={styles.select}
           value={ordenarPor}
           onChange={(e) => onOrdenChange(e.target.value)}
@@ -65,7 +65,7 @@ const Filters = ({
 
       {/* 🔄 ORDEN ASC / DESC */}
       {ordenarPor && (
-        <button 
+        <button
           className={styles.sortButton}
           onClick={onOrdenDireccionChange}
           title={orden === 'asc' ? 'Ascendente' : 'Descendente'}
