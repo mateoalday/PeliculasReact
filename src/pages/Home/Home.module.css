@@ -23,7 +23,15 @@
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin-bottom: 30px;
+  margin: 40px 0;
+}
+
+.filtersWrapper {
+  margin-bottom: 40px;
+}
+
+.statsWrapper {
+  margin-top: 40px;
 }
 
 .tabBtn {
