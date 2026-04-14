@@ -9,7 +9,8 @@ const MediaForm = ({ editingMedia, onSubmit, onCancel }) => {
         año: '',
         genero: '',
         rating: '',
-        tipo: 'Película' // Valor por defecto como te piden (Película / Serie)
+        tipo: 'Película',
+        imagen: ''
     };
 
     // 2. Manejo de estado general con useState
@@ -25,7 +26,8 @@ const MediaForm = ({ editingMedia, onSubmit, onCancel }) => {
                 año: editingMedia.año || '',
                 genero: editingMedia.genero || '',
                 rating: editingMedia.rating || '',
-                tipo: editingMedia.tipo || 'Película'
+                tipo: editingMedia.tipo || 'Película',
+                imagen: editingMedia.imagen || ''
             });
         } else {
             // Si no estamos editando (ej. se canceló), volvemos a vaciar todo
@@ -96,7 +98,25 @@ const MediaForm = ({ editingMedia, onSubmit, onCancel }) => {
 
             <div className={styles.formGroup}>
                 <label>Género *: </label>
-                <input className={styles.input} name="genero" value={formData.genero} onChange={handleChange} placeholder="Ej: Ciencia Ficción" />
+                <select className={styles.input} name="genero" value={formData.genero} onChange={handleChange}>
+                    <option value="">Seleccione un género...</option>
+                    <option value="Acción">Acción</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Ciencia Ficción">Ciencia Ficción</option>
+                    <option value="Terror">Terror</option>
+                    <option value="Comedia">Comedia</option>
+                    <option value="Fantasía">Fantasía</option>
+                </select>
+            </div>
+
+            <div className={styles.formGroup}>
+                <label>URL del Póster/Imagen: </label>
+                <input className={styles.input}
+                    name="imagen"
+                    value={formData.imagen}
+                    onChange={handleChange}
+                    placeholder="Ej: https://.../imagen.jpg"
+                />
             </div>
 
             <div className={styles.formGroup}>
