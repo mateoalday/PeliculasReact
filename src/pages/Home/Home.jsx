@@ -5,6 +5,7 @@ import styles from "./Home.module.css";
 import MediaForm from '../../components/MediaForm/MediaForm.jsx';
 import StatsPanel from '../../Components/StatsPanel/StatsPanel.jsx';
 import Catalogo from '../../components/Catalogo/Catalogo.jsx';
+import Filters from '../../Components/Filters/Filters.jsx';
 
 const Home = () => {
   const [peliculas, setPeliculas] = useState([]);
@@ -146,6 +147,21 @@ const Home = () => {
         </button>
       </div>
 
+      {vistaActiva !== 'gestion' && (
+        <div className={styles.filtersWrapper}>
+          <Filters 
+            filtroGenero={filtroGenero}
+            onGeneroChange={setFiltroGenero}
+            filtroTipo={filtroTipo}
+            onTipoChange={setFiltroTipo}
+            ordenarPor={ordenarPor}
+            onOrdenChange={setOrdenarPor}
+            orden={orden}
+            onOrdenDireccionChange={() => setOrden(orden === 'asc' ? 'desc' : 'asc')}
+          />
+        </div>
+      )}
+
       {vistaActiva === 'gestion' && (
         <MediaForm
           editingMedia={editando}
@@ -180,7 +196,7 @@ const Home = () => {
       )}
 
       {/* Panel que muestra estadísticas movido al fondo */}
-      <div style={{ marginTop: '40px' }}>
+      <div className={styles.statsWrapper}>
          <StatsPanel peliculas={peliculas} />
       </div>
     </div>
