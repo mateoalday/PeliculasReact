@@ -1,7 +1,85 @@
-.statsContainer {
+.dashboard {
+  background: rgba(30, 30, 35, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 100%;
+}
+
+.dashboardTitle {
+  color: #fff;
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.countersWrapper {
   display: flex;
-  gap: var(--spacing-md, 16px);
+  gap: 15px;
   justify-content: center;
-  margin-bottom: var(--spacing-lg, 30px);
   flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.genreSection {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 16px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.genreTitle {
+  margin: 0 0 12px 0;
+  color: #bbb;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.genreTags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.genreTag {
+  background: linear-gradient(135deg, #3b82f644, #2563eb44);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #e2e8f0;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.2s;
+}
+
+.genreTag:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #3b82f666, #2563eb66);
+}
+
+.genreTag strong {
+  background: white;
+  color: #0f172a;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.emptyText {
+  color: #64748b;
+  font-style: italic;
+  font-size: 0.9rem;
 }
