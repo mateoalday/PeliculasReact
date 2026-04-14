@@ -13,45 +13,29 @@ const Home = () => {
   const [ordenarPor, setOrdenarPor] = useState('');
   const [orden, setOrden] = useState('asc');
   const [editando, setEditando] = useState(null);
+  const [cargado, setCargado] = useState(false)
 
-  // 📦 LOCAL STORAGE
+   // 1-LEER: Al cargar la página lee las películas guardadas en localStorage
+  // El [] hace que se ejecute solo una vez al montar el componente
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('cinetrack-peliculas'));
-
-    if (data && data.length > 0) {
+    if (data) {
       setPeliculas(data);
-    } else {
-      // 🔥 DATOS DE PRUEBA
-      setPeliculas([
-        {
-          id: 1,
-          titulo: "Batman",
-          director: "Nolan",
-          año: 2008,
-          genero: "Acción",
-          rating: 9,
-          tipo: "Película",
-          visto: false
-        },
-        {
-          id: 2,
-          titulo: "Breaking Bad",
-          director: "Vince Gilligan",
-          año: 2008,
-          genero: "Drama",
-          rating: 10,
-          tipo: "Serie",
-          visto: true
-        }
-      ]);
     }
+    // Una vez que terminó de leer, marca cargado como true
+    setCargado(true);
   }, []);
 
+  // 2-GUARDAR: Guarda las películas en localStorage cada vez que cambian
+  // Solo guarda si cargado es true, para evitar pisar los datos antes de leerlos
   useEffect(() => {
-    localStorage.setItem('cinetrack-peliculas', JSON.stringify(peliculas));
-  }, [peliculas]);
+    if (cargado) {
+      localStorage.setItem('cinetrack-peliculas', JSON.stringify(peliculas));
+    }
+  }, [peliculas, cargado]);
 
-  // ➕ CREAR / EDITAR
+  // Maneja el envío del formulario para crear o editar una película
+  // Si hay una película en edición la modifica, sino crea una nueva
   const handleSubmit = (formData) => {
     if (editando) {
       setPeliculas(prev =>
@@ -64,15 +48,15 @@ const Home = () => {
       setPeliculas(prev => [
         ...prev,
         {
-          id: Date.now(),
+          id: Date.now(), // usa la fecha actual como id único
           ...formData,
-          visto: false
+          visto: false // toda película nueva empieza como no vista
         }
       ]);
     }
   };
 
-  // 👁 CAMBIAR ESTADO
+  // Cambia el estado visto/no visto de una película buscándola por su id
   const cambiarEstado = (id) => {
     setPeliculas(prev =>
       prev.map(p =>
@@ -81,12 +65,13 @@ const Home = () => {
     );
   };
 
-  // ❌ ELIMINAR
+  // Elimina una película del array filtrando todas menos la que tiene ese id
   const eliminar = (id) => {
     setPeliculas(prev => prev.filter(p => p.id !== id));
   };
 
-  // 🔍 FILTRAR + ORDENAR
+  // Filtra y ordena las películas según búsqueda, géneros, tipo y orden
+  // useMemo evita recalcular si no cambiaron las dependencias
   const peliculasFiltradas = useMemo(() => {
     return peliculas
       .filter(p =>
@@ -97,13 +82,10 @@ const Home = () => {
       .filter(p => !filtroTipo || p.tipo === filtroTipo)
       .sort((a, b) => {
         if (!ordenarPor) return 0;
-
         let resultado = 0;
-
         if (ordenarPor === 'año' || ordenarPor === 'rating') {
           resultado = a[ordenarPor] - b[ordenarPor];
         }
-
         return orden === 'asc' ? resultado : -resultado;
       });
   }, [peliculas, busqueda, filtroGenero, filtroTipo, ordenarPor, orden]);
@@ -111,20 +93,21 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <Titulo>CineTrack</Titulo>
-
+      {/* Panel que muestra estadísticas del total de películas */}
       <StatsPanel peliculas={peliculas} />
-
+      {/* Formulario para agregar o editar películas */}
       <MediaForm
         editingMedia={editando}
         onSubmit={handleSubmit}
         onCancel={() => setEditando(null)}
       />
-
-      {/* 👇 ACÁ LE PASAMOS TODO */}
-      <MediaList peliculas={peliculasFiltradas}
+      {/* Lista de películas con las acciones de eliminar, editar y cambiar estado */}
+      <MediaList
+        peliculas={peliculasFiltradas}
         accionEliminar={(item) => eliminar(item.id)}
         accionEditar={(item) => setEditando(item)}
-        accionCambiarEstado={(item) => cambiarEstado(item.id)} />
+        accionCambiarEstado={(item) => cambiarEstado(item.id)}
+      />
     </div>
   );
 };
