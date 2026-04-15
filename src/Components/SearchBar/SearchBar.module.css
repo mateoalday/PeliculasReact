@@ -1,13 +1,9 @@
 .searchContainer {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 8px; /* Espacio entre el texto y el input */
   width: 100%;
-  padding: var(--spacing-md);
-  background: rgba(22, 33, 62, 0.5);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  margin-bottom: var(--spacing-md);
+  max-width: 400px; /* Ésto hace que no sea tan larga, modificalo a gusto */
 }
 
 .label {
@@ -19,15 +15,15 @@
 }
 
 .input {
-  padding: var(--spacing-sm);
-  background: var(--color-card) ;
+  width: 100%;
+  padding: 10px 15px;
+  background: var(--color-surface, rgba(30, 41, 59, 1)); /* Gris oscuro moderno */
   border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  color: var(--color-text);
+  color: #e2e8f0;
   font-size: 0.95rem;
-  width: 100%;
   box-sizing: border-box;
-  transition: border-color 0.2s;
+  transition: all 0.3s ease;
 }
 
 .input:hover {
@@ -36,10 +32,11 @@
 
 .input:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15); /* Efecto neón en los bordes */
   outline: none;
 }
 
 .input::placeholder {
-  color: var(--color-text-muted);
+  color: #94a3b8;
+  font-style: italic;
 }

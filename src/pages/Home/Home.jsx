@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import Titulo from "../../components/Titulo/Titulo.jsx";
-import MediaList from "../../components/MediaList/MediaList.jsx";
+import Titulo from "../../Components/Titulo/Titulo.jsx";
+import MediaList from "../../Components/MediaList/MediaList.jsx";
 import styles from "./Home.module.css";
-import MediaForm from '../../components/MediaForm/MediaForm.jsx';
+import MediaForm from '../../Components/MediaForm/MediaForm.jsx';
 import StatsPanel from '../../Components/StatsPanel/StatsPanel.jsx';
-import Catalogo from '../../components/Catalogo/Catalogo.jsx';
+import Catalogo from '../../Components/Catalogo/Catalogo.jsx';
 import Filters from '../../Components/Filters/Filters.jsx';
-import SearchBar from '../../components/SearchBar/SearchBar.jsx';
+import SearchBar from '../../Components/SearchBar/SearchBar.jsx';
 
 const Home = () => {
   const [peliculas, setPeliculas] = useState([]);
