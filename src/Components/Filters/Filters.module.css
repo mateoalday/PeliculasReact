@@ -47,7 +47,7 @@
 
 .select option {
   background: var(--color-surface);
-  color: var(--color-text);
+  color: var(--color-accent);
 }
 
 .sortButton {
@@ -84,11 +84,11 @@
     flex-direction: column;
     gap: var(--spacing-sm);
   }
-  
+
   .filterGroup {
     width: 100%;
   }
-  
+
   .sortButton {
     width: 100%;
     justify-content: center;
