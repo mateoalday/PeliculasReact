@@ -6,7 +6,6 @@ import MediaForm from '../../Components/MediaForm/MediaForm.jsx';
 import StatsPanel from '../../Components/StatsPanel/StatsPanel.jsx';
 import Catalogo from '../../Components/Catalogo/Catalogo.jsx';
 import Filters from '../../Components/Filters/Filters.jsx';
-import SearchBar from '../../Components/SearchBar/SearchBar.jsx';
 import { peliculasPredeterminadas } from '../../data/peliculasPredeterminadas.js';
 
 
@@ -132,6 +131,8 @@ const Home = () => {
       {vistaActiva !== 'gestion' && (
         <div className={styles.filtersWrapper}>
           <Filters
+            busqueda={busqueda}
+            onBusquedaChange={setBusqueda}
             filtroGenero={filtroGenero}
             onGeneroChange={setFiltroGenero}
             filtroTipo={filtroTipo}
@@ -141,7 +142,6 @@ const Home = () => {
             orden={orden}
             onOrdenDireccionChange={() => setOrden(orden === 'asc' ? 'desc' : 'asc')}
           />
-          <SearchBar busqueda={busqueda} setBusqueda={setBusqueda} />
         </div>
       )}
 

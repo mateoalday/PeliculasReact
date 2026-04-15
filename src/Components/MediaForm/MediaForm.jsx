@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './MediaForm.module.css';
 
 const MediaForm = ({ editingMedia, onSubmit, onCancel }) => {
-    // 1. Estado inicial del formulario vacío
+
     const initialState = {
         titulo: '',
         director: '',
@@ -13,11 +13,9 @@ const MediaForm = ({ editingMedia, onSubmit, onCancel }) => {
         imagen: ''
     };
 
-    // 2. Manejo de estado general con useState
     const [formData, setFormData] = useState(initialState);
     const [error, setError] = useState('');
 
-    // 3. useEffect para cargar los datos en caso de edición (editingMedia)
     useEffect(() => {
         if (editingMedia) {
             setFormData({
@@ -30,7 +28,6 @@ const MediaForm = ({ editingMedia, onSubmit, onCancel }) => {
                 imagen: editingMedia.imagen || ''
             });
         } else {
-            // Si no estamos editando (ej. se canceló), volvemos a vaciar todo
             setFormData(initialState);
         }
     }, [editingMedia]);
@@ -45,19 +42,18 @@ const MediaForm = ({ editingMedia, onSubmit, onCancel }) => {
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
-        // 4. Validar campos obligatorios antes de enviar (Título, Director y Género)
+        // validaciones 
         if (!formData.titulo.trim() || !formData.director.trim() || !formData.genero.trim()) {
             setError('Error: El título, el director y el género son obligatorios.');
             return;
         }
 
-        // Validación extra: comprobar los rangos del rating (0 a 10)
         if (formData.rating !== '' && (formData.rating < 0 || formData.rating > 10)) {
             setError('Error: El rating debe estar entre 0 y 10.');
             return;
         }
 
-        setError(''); // Limpiamos errores en caso de éxito
+        setError('');
 
         // Si queremos estar seguros de que el número viaje como número
         const dataToSend = {
@@ -66,7 +62,7 @@ const MediaForm = ({ editingMedia, onSubmit, onCancel }) => {
             rating: formData.rating ? Number(formData.rating) : ''
         };
 
-        // Llamamos la función prop (que será el "handleSubmit" de tu Home.jsx)
+        // Llamamos la función prop (que será el "handleSubmit" de Home.jsx)
         onSubmit(dataToSend);
 
         // Al agregar una nueva, limpiamos el formulario para poder agregar otra

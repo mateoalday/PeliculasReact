@@ -1,6 +1,9 @@
 import styles from './Filters.module.css';
+import SearchBar from '../SearchBar/SearchBar';
 
 const Filters = ({
+  busqueda,
+  onBusquedaChange,
   filtroGenero,
   onGeneroChange,
   filtroTipo,
@@ -12,8 +15,9 @@ const Filters = ({
 }) => {
   return (
     <div className={styles.filtersContainer}>
+      <SearchBar busqueda={busqueda} setBusqueda={onBusquedaChange} />
 
-      {/* 🎬 GÉNERO */}
+      {/*  GÉNERO */}
       <div className={styles.filterGroup}>
         <label className={styles.label}>Género</label>
         <select
@@ -35,7 +39,7 @@ const Filters = ({
         </select>
       </div>
 
-      {/* 🎞 TIPO */}
+      {/*  TIPO */}
       <div className={styles.filterGroup}>
         <label className={styles.label}>Tipo</label>
         <select
@@ -49,7 +53,7 @@ const Filters = ({
         </select>
       </div>
 
-      {/* 📊 ORDEN */}
+      {/*  ORDEN */}
       <div className={styles.filterGroup}>
         <label className={styles.label}>Ordenar por</label>
         <select
@@ -63,7 +67,7 @@ const Filters = ({
         </select>
       </div>
 
-      {/* 🔄 ORDEN ASC / DESC */}
+      {/*  ORDEN ASC / DESC */}
       {ordenarPor && (
         <button
           className={styles.sortButton}
