@@ -5,7 +5,7 @@
 .titulo {
     text-align: center;
     margin-bottom: 20px;
-    color: var(--color-primary, #333);
+    color: var(--color-primary, #c5bcbc);
 }
 
 .grid {
