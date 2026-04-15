@@ -6,6 +6,7 @@ import MediaForm from '../../components/MediaForm/MediaForm.jsx';
 import StatsPanel from '../../Components/StatsPanel/StatsPanel.jsx';
 import Catalogo from '../../components/Catalogo/Catalogo.jsx';
 import Filters from '../../Components/Filters/Filters.jsx';
+import SearchBar from '../../components/SearchBar/SearchBar.jsx';
 
 const Home = () => {
   const [peliculas, setPeliculas] = useState([]);
@@ -98,9 +99,11 @@ const Home = () => {
   };
 
   // Elimina una película del array filtrando todas menos la que tiene ese id
-  const eliminar = (id) => {
+const eliminar = (id) => {
+  if (window.confirm("¿Seguro que querés eliminar esta película?")) {
     setPeliculas(prev => prev.filter(p => p.id !== id));
-  };
+  }
+};
 
   // Filtra y ordena las películas según búsqueda, géneros, tipo y orden
   // useMemo evita recalcular si no cambiaron las dependencias
@@ -159,6 +162,7 @@ const Home = () => {
             orden={orden}
             onOrdenDireccionChange={() => setOrden(orden === 'asc' ? 'desc' : 'asc')}
           />
+          <SearchBar busqueda={busqueda} setBusqueda={setBusqueda}/>
         </div>
       )}
 
