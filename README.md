@@ -5,10 +5,10 @@
 ---
 
 ## 👥 Miembros del Equipo
-* **[Tu Nombre y Apellido]** - (PM / Scrum Master & Desarrollador) - [@tuGit](https://github.com/tuGit)
-* **[Nombre Integrante 2]** - (Desarrollador) - [@gitIntegrante2](https://github.com/gitIntegrante2)
-* **[Nombre Integrante 3]** - (Desarrollador) - [@gitIntegrante3](https://github.com/gitIntegrante3)
-
+* **[MATTEO ALDAY]** - (PM / Scrum Master & Desarrollador) -
+* **[JOAQUIN VULCANO]** - (Desarrollador) - 
+* **[FIDEL PIZARRO]** - (Desarrollador)
+* 
 **Docentes Invitados al Tablero:**
 * Agustin: guillermo.chiarotto@est.fi.uncoma.edu.ar
 * Lucas: lucas.margni@est.fi.uncoma.edu.ar
