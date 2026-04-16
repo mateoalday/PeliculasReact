@@ -1,13 +1,13 @@
 .formContainer {
     background-color: #020202ff;
-    /* Mismo fondo de tus MediaCards */
+
     padding: 25px;
     border-radius: var(--radius-lg, 8px);
     margin-bottom: 25px;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    /* Reemplaza todos los margins inferiores */
+
 }
 
 .title {
@@ -51,7 +51,7 @@
 .input:focus {
     outline: none;
     border-color: var(--color-accent, #646cff);
-    /* Resalta cuando haces click */
+
 }
 
 .buttonContainer {
@@ -63,7 +63,7 @@
 .submitBtn {
     padding: 10px 15px;
     background-color: #4CAF50;
-    /* Verde estilo éxito */
+
     color: white;
     border: none;
     border-radius: 6px;
@@ -79,7 +79,7 @@
 .cancelBtn {
     padding: 10px 15px;
     background-color: #ff4a4a;
-    /* Rojo para cancelar */
+
     color: white;
     border: none;
     border-radius: 6px;
